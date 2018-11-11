@@ -72,7 +72,7 @@ describe RestaurantsController, type: :controller do
 
     it "fails to update a non existent id" do
       expect {
-        patch :update, params: { id: 22, name: 'Chez Pierre' }
+        patch :update, params: { id: rest.id + 1, name: 'Chez Pierre' }
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
