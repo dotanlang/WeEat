@@ -5,7 +5,7 @@ FactoryBot.define do
     name { Faker::NewGirl.character }
     cuisine { Faker::Witcher.monster }
     address { Faker::Address.full_address }
-    rating { Faker::Number.between(1, 10) }
+    rating { Faker::Number.between(0, 3) }
     max_delivery_time { Faker::Number.between(30, 120) }
     ten_bis { Faker::Boolean.boolean }
 

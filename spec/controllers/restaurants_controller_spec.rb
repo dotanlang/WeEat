@@ -12,7 +12,7 @@ describe RestaurantsController, type: :controller do
 
   describe '#create' do
     it "creates a new restaurant" do
-      post :create, params: { name: 'Artzieli',
+      post :create, params: { name: 'Artzieli11',
                                     cuisine: 'pizza',
                                     rating: 3,
                                     ten_bis: true,
@@ -20,6 +20,45 @@ describe RestaurantsController, type: :controller do
                                     max_delivery_time: 45 }
       expect(response.status).to eq(200)
     end
+
+    it "can't create a restaurant with an invalid rating" do
+      post :create, params: { name: 'Artzieli',
+                              cuisine: 'pizza',
+                              rating: 7,
+                              ten_bis: true,
+                              address: 'street in tel aviv',
+                              max_delivery_time: 45 }
+      expect(response.status).to eq(400)
+    end
+
+    it "creates a restaurant without optional fields" do
+      post :create, params: { name: 'Artzieli', address: 'street in tel aviv' }
+      expect(response.status).to eq(200)
+    end
+
+    it "can't create a restaurant without a name" do
+      post :create, params: { address: 'street in tel aviv' }
+      expect(response.status).to eq(400)
+    end
+
+    it "can't create a restaurant with a name that already exists" do
+      post :create, params: { name: 'Artzieli1',
+                              cuisine: 'pizza',
+                              rating: 3,
+                              ten_bis: true,
+                              address: 'street in tel aviv',
+                              max_delivery_time: 45 }
+      expect(response.status).to eq(200)
+
+      post :create, params: { name: 'Artzieli1',
+                              cuisine: 'pizza',
+                              rating: 3,
+                              ten_bis: true,
+                              address: 'street in tel aviv',
+                              max_delivery_time: 45 }
+      expect(response.status).to eq(409)
+    end
+
   end
 
   describe '#update' do

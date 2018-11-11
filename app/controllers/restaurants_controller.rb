@@ -6,9 +6,20 @@ class RestaurantsController < ApplicationController
     render json: Restaurant.all
   end
 
+  def new
+    @rest = Restaurant.new
+  end
+
   def create
-    rest = Restaurant.create(restaurant_params)
-    render json: rest
+    @rest = Restaurant.new(restaurant_params)
+    if @rest.valid?
+      @rest.save
+      render json: @rest
+    elsif @rest.errors[:name_exists].present?
+        render json: @rest.errors, status: :conflict
+    else
+      render json: @rest.errors, status: :bad_request
+    end
   end
 
   def destroy
