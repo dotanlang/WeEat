@@ -16,6 +16,10 @@ RSpec.describe ReviewsController, type: :controller do
                               rating: 3,
                               comments: 'I like it here'}
       expect(response.status).to eq(200)
+
+      review_id = JSON.parse(response.body)['id']
+      expect(Review.where(:restaurant_id => rest.id).count()).to eq(1)
+      expect(Review.find_by_restaurant_id(rest.id)['id']).to eq(review_id)
     end
 
     it "can't create a review without a restaurant_id" do
@@ -23,6 +27,7 @@ RSpec.describe ReviewsController, type: :controller do
                               rating: 3,
                               comments: 'I like it here'}
       expect(response.status).to eq(400)
+      expect(Review.count).to eq 0
     end
 
     it "creates a review without optional fields" do
@@ -30,6 +35,10 @@ RSpec.describe ReviewsController, type: :controller do
                               reviewer_name: "Dotan Langsam Schwartz",
                               rating: 3}
       expect(response.status).to eq(200)
+
+      review_id = JSON.parse(response.body)['id']
+      expect(Review.where(:restaurant_id => rest.id).count()).to eq 1
+      expect(Review.find_by_restaurant_id(rest.id)['id']).to eq(review_id)
     end
 
     it "can't create a review without rating" do
@@ -37,6 +46,7 @@ RSpec.describe ReviewsController, type: :controller do
                               reviewer_name: "Dotan Langsam Schwartz",
                               comments: 'I like it here'}
       expect(response.status).to eq(400)
+      expect(Review.count).to eq 0
     end
 
     it "can't create a review with rating out of range" do
@@ -45,6 +55,7 @@ RSpec.describe ReviewsController, type: :controller do
                               rating: 6,
                               comments: 'I like it here'}
       expect(response.status).to eq(400)
+      expect(Review.count).to eq 0
     end
 
     it "creates two reviews for the same restaurant" do
@@ -59,6 +70,7 @@ RSpec.describe ReviewsController, type: :controller do
                               rating: 3,
                               comments: 'I like it here too'}
       expect(response.status).to eq(200)
+      expect(Review.where(:restaurant_id => rest.id).count()).to eq 2
     end
 
     it "updates the restaurant's rating" do
@@ -74,14 +86,14 @@ RSpec.describe ReviewsController, type: :controller do
                               rating: 3,
                               comments: 'I like it here too'}
       expect(response.status).to eq(200)
-      expect(Restaurant.find(rest.id).rating).to eq(2)
+      expect(Restaurant.find(rest.id).rating).to eq 2
     end
 
   end
 
   describe '#update' do
-    let!(:rest) { FactoryBot.create(:restaurant) }
-    let!(:review) { FactoryBot.create(:review, restaurant_id: rest.id) }
+    let(:rest) { FactoryBot.create(:restaurant) }
+    let(:review) { FactoryBot.create(:review, restaurant_id: rest.id) }
     it "updates the comment name" do
       patch :update, params: {id: review.id, comments: 'This is an updated comment' }
       body = JSON.parse(response.body)

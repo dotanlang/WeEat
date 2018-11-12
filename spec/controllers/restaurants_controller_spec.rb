@@ -18,16 +18,23 @@ describe RestaurantsController, type: :controller do
                                     address: 'street in tel aviv',
                                     max_delivery_time: 45 }
       expect(response.status).to eq(200)
+      rest_id = JSON.parse(response.body)['id']
+      expect(Restaurant.count()).to eq(1)
+      expect(Restaurant.find_by_name('Artzieli11')['id']).to eq(rest_id)
     end
 
     it "creates a restaurant without optional fields" do
       post :create, params: { name: 'Artzieli', address: 'street in tel aviv' }
       expect(response.status).to eq(200)
+      rest_id = JSON.parse(response.body)['id']
+      expect(Restaurant.count()).to eq(1)
+      expect(Restaurant.find_by_name('Artzieli')['id']).to eq(rest_id)
     end
 
     it "can't create a restaurant without a name" do
       post :create, params: { address: 'street in tel aviv' }
       expect(response.status).to eq(400)
+      expect(Restaurant.count()).to eq(0)
     end
 
     it "can't create a restaurant with a name that already exists" do
@@ -37,6 +44,7 @@ describe RestaurantsController, type: :controller do
                               address: 'street in tel aviv',
                               max_delivery_time: 45 }
       expect(response.status).to eq(200)
+      expect(Restaurant.count()).to eq(1)
 
       post :create, params: { name: 'Artzieli1',
                               cuisine: 'pizza',
@@ -44,6 +52,7 @@ describe RestaurantsController, type: :controller do
                               address: 'street in tel aviv',
                               max_delivery_time: 45 }
       expect(response.status).to eq(409)
+      expect(Restaurant.count()).to eq(1)
     end
 
   end
