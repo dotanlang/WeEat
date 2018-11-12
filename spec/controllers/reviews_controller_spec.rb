@@ -61,6 +61,22 @@ RSpec.describe ReviewsController, type: :controller do
       expect(response.status).to eq(200)
     end
 
+    it "updates the restaurant's rating" do
+      post :create, params: { restaurant_id: rest.id,
+                              reviewer_name: "Dotan Langsam Schwartz",
+                              rating: 1,
+                              comments: 'I like it here'}
+      expect(response.status).to eq(200)
+      expect(Restaurant.find(rest.id).rating).to eq(1)
+
+      post :create, params: { restaurant_id: rest.id,
+                              reviewer_name: "Pierre Schwartz",
+                              rating: 3,
+                              comments: 'I like it here too'}
+      expect(response.status).to eq(200)
+      expect(Restaurant.find(rest.id).rating).to eq(2)
+    end
+
   end
 
   describe '#update' do
@@ -77,6 +93,21 @@ RSpec.describe ReviewsController, type: :controller do
       expect {
         patch :update, params: { id: review.id + 1, comments: 'This is an updated comment' }
       }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "updates the restaurant's rating when the rating in the review changes" do
+      post :create, params: { restaurant_id: rest.id, reviewer_name: "Dotan Langsam Schwartz", rating: 1}
+      expect(response.status).to eq(200)
+
+      post :create, params: { restaurant_id: rest.id, reviewer_name: "Pierre Schwartz", rating: 3 }
+
+      review_id = JSON.parse(response.body)['id']
+      expect(response.status).to eq(200)
+
+      patch :update, params: {id: review_id, rating: 3 }
+      expect(response.status).to eq(200)
+      new_rating = Review.where(restaurant_id: rest.id).average(:rating).round(0)
+      expect(Restaurant.find(rest.id).rating).to eq(new_rating)
     end
   end
 

@@ -12,6 +12,8 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     if @review.valid?
       @review.save
+
+      update_restaurant_rating(@review.restaurant_id)
       render json: @review
     else
       render json: @review.errors, status: :bad_request
@@ -25,6 +27,10 @@ class ReviewsController < ApplicationController
   def update
     rest = Review.find(params[:id])
     rest.update_attributes(update_review_params)
+    if params[:rating].present?
+      update_restaurant_rating(rest.restaurant_id)
+    end
+
     render json: rest
   end
 
@@ -36,5 +42,12 @@ class ReviewsController < ApplicationController
 
   def update_review_params
     params.permit(:rating, :comments)
+  end
+
+  def update_restaurant_rating(rest_id)
+    rest = Restaurant.find(rest_id)
+    new_rating = Review.where(restaurant_id: @review.restaurant_id).average(:rating).round(0)
+    rest.rating = new_rating
+    rest.save
   end
 end
