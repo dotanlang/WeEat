@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
 
   def update
     rest = Review.find(params[:id])
-    rest.update_attributes(review_params)
+    rest.update_attributes(update_review_params)
     render json: rest
   end
 
@@ -32,5 +32,9 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.permit(:id, :restaurant_id, :reviewer_name, :rating, :comments)
+  end
+
+  def update_review_params
+    params.permit(:rating, :comments)
   end
 end

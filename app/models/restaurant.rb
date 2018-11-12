@@ -18,6 +18,10 @@ class Restaurant < ApplicationRecord
   validates :name, :address, presence: true
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 3 }, :allow_nil => true
   validates :max_delivery_time, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, :allow_nil => true
+
+  def rating
+    Review.where(restaurant_id: self.id).average(:rating)
+  end
 end
 
 
