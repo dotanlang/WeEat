@@ -63,4 +63,6 @@ Rails.application.configure do
 
   # Enable javasript_pack_tag to load more assets from webpack-dev-server
   config.x.webpacker[:dev_server_host] = "http://127.0.0.1:8080"
+
+  config.webpacker.check_yarn_integrity = false
 end
