@@ -12,9 +12,7 @@ const TableRow = ({row}) => (
 
 const Table = ({data}) => (
 <table>
-  {data.map(row => {
-    <TableRow row={row} />
-  })}
+  {data.map(row => <TableRow row={row} />)}
 </table>
 )
 
@@ -35,11 +33,11 @@ class App extends Component {
   }
 
   render() {
-    return
+    return(
       <div>
         <div> {this.props.title} </div>
         <Table data={this.state.restaurants} />
-      </div>
+      </div>)
   }
 }
 

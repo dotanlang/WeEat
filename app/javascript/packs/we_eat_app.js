@@ -7,8 +7,6 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import App from '../components/App';
 
-// App = <div> Hellooooo </div>;
-
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<div> Hellooooo </div>, document.getElementById('root'));
+  ReactDOM.render(<App/>, document.getElementById('root'));
 })
