@@ -3,11 +3,11 @@
   <head>
     <title>WeEat</title>
     <%= stylesheet_link_tag 'react-table', media: 'all' %>
+    <link href="<%= asset_pack_path 'we_eat_app.css' %>" media="screen" rel="stylesheet" />
+    <link href="/assets/react-table.css" media="screen" rel="stylesheet" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <div id="root"/>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>

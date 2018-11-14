@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
+import TenBisIcon from "./TenBisIcon"
 const x = require('react-table/react-table.css');
 
 console.info('x')
@@ -32,7 +33,8 @@ class RestaurantsTable extends Component {
             accessor: 'address'
         }, {
             Header: 'Ten bis',
-            accessor: 'ten_bis'
+            accessor: 'ten_bis',
+            Cell: row => (<TenBisIcon display={row.value}/>)
         }, {
             Header: 'Rating',
             accessor: 'rating'
