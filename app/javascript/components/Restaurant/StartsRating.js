@@ -9,7 +9,7 @@ class StartsRating extends Component {
     render() {
         return (
             <StarRatings
-                rating={this.props.rating}
+                rating={this.props.rating ? this.props.rating : 0}
                 starRatedColor="red"
                 numberOfStars={3}
                 name='rating'
