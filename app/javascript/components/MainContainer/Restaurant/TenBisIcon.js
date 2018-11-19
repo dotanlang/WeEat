@@ -8,7 +8,14 @@ class TenBisIcon extends Component {
     }
 
     render() {
-        return (<img className='ten-bis-icon' src={TenBisImage} hidden={!this.props.display}></img>)
+        const should_displey = this.props.display;
+        let img_tag = <div className='ten-bis-no-icon'/>;
+
+        if (should_displey) {
+            img_tag = <img className='ten-bis-icon' src={TenBisImage}/>;
+        }
+
+        return (<div>{img_tag}</div>);
     }
 }
 

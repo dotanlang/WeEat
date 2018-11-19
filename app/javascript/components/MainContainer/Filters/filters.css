@@ -1,0 +1,12 @@
+.filters-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #B00100;
+    height: 100px;
+}
+
+.filter-name {
+    margin-right: -450px;
+    font-size: 16px;
+}
