@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './filters.css'
 import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
 class Filters extends Component {
     constructor(props){
@@ -15,6 +16,7 @@ class Filters extends Component {
         this.onChangeRating = this.onChangeRating.bind(this);
         this.onChangeCuisine = this.onChangeCuisine.bind(this);
         this.onChangeTenBis = this.onChangeTenBis.bind(this);
+        this.onChangeSearch = this.onChangeSearch.bind(this);
     }
 
     onChangeRating(event){
@@ -32,6 +34,10 @@ class Filters extends Component {
         this.props.onChangeFilter('ten_bis_filter', event.value);
     }
 
+    onChangeSearch(event){
+        this.props.onChangeSearch(event.target.value);
+    }
+
     render() {
         return (
             <div className='filters-container'>
@@ -41,6 +47,8 @@ class Filters extends Component {
                 <Dropdown options={this.props.cuisines} onChange={this.onChangeCuisine} value={this.state.cuisine_filter_selected} placeholder="Cuisine" />
                 <label className='filter-name'>Accepts Ten Bis:</label>
                 <Dropdown options={['all', 'true', 'false']} onChange={this.onChangeTenBis} value={this.state.ten_bis_filter_selected} placeholder="Ten Bis" />
+                <label className='filter-name'>Search:</label>
+                <input type='text' className='search-box' onChange={this.onChangeSearch}/>
             </div>
         )
     }

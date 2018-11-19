@@ -20,6 +20,7 @@ class MainContainer extends Component {
         };
 
         this.onChangeFilter = this.onChangeFilter.bind(this);
+        this.onChangeSearch = this.onChangeSearch.bind(this);
         this.filterRestaurants = this.filterRestaurants.bind(this);
 
     }
@@ -38,6 +39,10 @@ class MainContainer extends Component {
         this.setState({[filter_name]: value}, this.filterRestaurants);
     }
 
+    onChangeSearch(value){
+        this.setState({search_text: value}, this.filterRestaurants);
+    }
+
     filterRestaurants(){
         let filtered = this.state.restaurants;
         if (this.state.rating_filter != 'all'){
@@ -53,13 +58,18 @@ class MainContainer extends Component {
             filtered = filtered.filter(x => x.ten_bis == boolValue || (!x.ten_bis && !boolValue));
         }
 
+        if (this.state.search_text != ''){
+            let searchText = this.state.search_text.toLowerCase();
+            filtered = filtered.filter(x => x.name.toLowerCase().indexOf(searchText) !== -1)
+        }
+
         this.setState({filtered_restaurants: filtered});
     }
 
     render () {
         return(
             <div>
-                <Filters cuisines={this.state.cuisines} onChangeFilter={this.onChangeFilter}/>
+                <Filters cuisines={this.state.cuisines} onChangeFilter={this.onChangeFilter} onChangeSearch={this.onChangeSearch}/>
                 <div className='main-content'>
                     <div className='rest-list'>
                         <RestaurantsList restaurants={this.state.filtered_restaurants}/>
