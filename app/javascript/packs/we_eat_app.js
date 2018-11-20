@@ -4,9 +4,12 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 import App from '../components/App';
+import { Provider } from "react-redux";
+import { store } from "../store/Store";
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App/>, document.getElementById('root'));
+  ReactDOM.render(<Provider store={store}>
+      <App/>
+  </Provider>, document.getElementById('root'));
 })

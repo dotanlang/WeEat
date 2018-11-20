@@ -1,15 +1,14 @@
 
-const state_defaults = {
+const initialState = {
     rating_filter: 'all',
     cuisine_filter: 'all',
     ten_bis_filter: 'all',
     search_text: '',
     restaurants: [],
-    filtered_restaurants: [],
     cuisines: []
 }
 
-export const restaurantsListReducer = (state=state_defaults, action) => {
+export const restaurantsListReducer = (state=initialState, action) => {
     switch (action.type) {
         case "GET_REST_LIST_RESPONSE": {
             state = { ...state,
@@ -19,9 +18,10 @@ export const restaurantsListReducer = (state=state_defaults, action) => {
             };
             break;
         }
-        case "FILTER_REST_LIST": {
+
+        case "REST_CHANGE_FILTER": {
             state = { ...state,
-                filtered_restaurants: action.payload.filtered_restaurants,
+                [action.payload.filter_name]: action.payload.value
             };
             break;
         }
