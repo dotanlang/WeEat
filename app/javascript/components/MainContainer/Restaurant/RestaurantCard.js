@@ -12,8 +12,6 @@ import './restaurant_card.css'
 // import '@material/react-card/dist/card.css';
 const x = require('@material/react-card/dist/card.css')
 
-console.log('x=' + x);
-
 
 class RestaurantCard extends Component {
     constructor(props) {
