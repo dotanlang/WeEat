@@ -17,10 +17,6 @@ const axios = require('axios');
 class MainContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.onChangeFilter = this.onChangeFilter.bind(this);
-        this.onChangeSearch = this.onChangeSearch.bind(this);
-
     }
 
     componentDidMount(){
@@ -38,11 +34,11 @@ class MainContainer extends Component {
     }
 
 
-    onChangeFilter(filter_name, value) {
+    onChangeFilter = (filter_name, value) => {
         this.props.dispatch(restChangeFilter(filter_name, value));
     }
 
-    onChangeSearch(value){
+    onChangeSearch = (value) => {
         this.props.dispatch(restChangeFilter('search_text', value));
     }
 

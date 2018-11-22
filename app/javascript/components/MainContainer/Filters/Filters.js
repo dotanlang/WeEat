@@ -16,60 +16,46 @@ class Filters extends Component {
             cuisine_filter_selected: 'all',
             ten_bis_filter_selected: 'all'
         }
-
-        this.onChangeRating = this.onChangeRating.bind(this);
-        this.onChangeCuisine = this.onChangeCuisine.bind(this);
-        this.onChangeTenBis = this.onChangeTenBis.bind(this);
-        this.onChangeSearch = this.onChangeSearch.bind(this);
-        this.showPortal = this.showPortal.bind(this);
-        this.hidePortal = this.hidePortal.bind(this);
     }
 
-    onChangeRating(event){
+    onChangeRating = (event) => {
         this.setState({rating_filter_selected: event.value})
         this.props.onChangeFilter('rating_filter', event.value);
     }
 
-    onChangeCuisine(event){
+    onChangeCuisine = (event) => {
         this.setState({cuisine_filter_selected: event.value})
         this.props.onChangeFilter('cuisine_filter', event.value);
     }
 
-    onChangeTenBis(event){
+    onChangeTenBis = (event) => {
         this.setState({ten_bis_filter_selected: event.value})
         this.props.onChangeFilter('ten_bis_filter', event.value);
     }
 
-    onChangeSearch(event){
+    onChangeSearch = (event) => {
         this.props.onChangeSearch(event.target.value);
     }
 
-    showPortal() {
+    showPortal = () => {
         this.setState({ show: true });
     }
 
-    hidePortal() {
+    hidePortal = () => {
         this.setState({ show: false, errorMsg: "" });
 
     }
 
     createRestaurant = (values) => {
-        console.log("submit this!");
-        console.log(values);
-
         axios.post('/restaurants', {
             ...values
         })
             .then((response) => {
-                console.log("CCCCC");
-                console.log(response);
                 this.hidePortal();
                 this.props.reloadRestaurants();
                 return response.data;
             })
             .catch((error) => {
-                console.log("TTTTT");
-                console.log(error);
                 this.setState({ errorMsg: "Can't create new restaurant"});
             });
     };
@@ -79,13 +65,26 @@ class Filters extends Component {
         return (
             <div className='filters-container'>
                 <label className='filter-name'>Rating:</label>
-                <Dropdown options={['all', '1', '2', '3']} onChange={this.onChangeRating} value={this.state.rating_filter_selected} placeholder="Rating" />
+                <Dropdown options={['all', '1', '2', '3']}
+                          onChange={this.onChangeRating}
+                          value={this.state.rating_filter_selected}
+                          placeholder="Rating" />
+
                 <label className='filter-name'>Cuisine:</label>
-                <Dropdown options={this.props.cuisines} onChange={this.onChangeCuisine} value={this.state.cuisine_filter_selected} placeholder="Cuisine" />
+                <Dropdown options={this.props.cuisines}
+                          onChange={this.onChangeCuisine}
+                          value={this.state.cuisine_filter_selected}
+                          placeholder="Cuisine" />
+
                 <label className='filter-name'>Ten Bis?</label>
-                <Dropdown options={['all', 'true', 'false']} onChange={this.onChangeTenBis} value={this.state.ten_bis_filter_selected} placeholder="Ten Bis" />
+                <Dropdown options={['all', 'true', 'false']}
+                          onChange={this.onChangeTenBis}
+                          value={this.state.ten_bis_filter_selected}
+                          placeholder="Ten Bis" />
+
                 <label className='filter-name'>Search:</label>
                 <input type='text' className='search-box' onChange={this.onChangeSearch}/>
+
                 <Portal>
                     { this.state.show &&
                         <div className='portal'>
@@ -96,6 +95,7 @@ class Filters extends Component {
                         </div>
                      }
                 </Portal>
+
                 <button className='add-rest-button' onClick={this.showPortal}>Add Restaurant</button>
             </div>
         )
