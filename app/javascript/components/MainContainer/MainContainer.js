@@ -24,6 +24,10 @@ class MainContainer extends Component {
     }
 
     componentDidMount(){
+        this.reloadRestaurants();
+    }
+
+    reloadRestaurants = () => {
         axios.get('/restaurants.json')
             .then((response) => {return response.data;})
             .then((data) => {
@@ -76,7 +80,9 @@ class MainContainer extends Component {
             <div>
                 <Filters cuisines={this.props.restaurants.cuisines}
                          onChangeFilter={this.onChangeFilter}
-                         onChangeSearch={this.onChangeSearch} />
+                         onChangeSearch={this.onChangeSearch}
+                         reloadRestaurants={this.reloadRestaurants}
+                />
                 <div className='main-content'>
                     <div className='rest-list'>
                         {this.createRestList()}

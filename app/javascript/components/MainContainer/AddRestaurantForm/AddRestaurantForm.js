@@ -8,8 +8,7 @@ class AddRestaurantForm extends Component {
     }
 
     render () {
-        const { handleSubmit, createRestaurant, cuisines, cancel} = this.props;
-        // cuisines.shift();
+        const { handleSubmit, createRestaurant, cuisines, cancel, errorMsg} = this.props;
         cuisines[0] = "";
         const options = cuisines.map((x) => <option key={x} value={x.toLowerCase()}>{x}</option>);
 
@@ -53,6 +52,9 @@ class AddRestaurantForm extends Component {
                         <button className='button' type="submit">Submit</button>
                         <button className='button' onClick={cancel}>Cancel</button>
                     </div>
+                    {
+                        errorMsg && <label className='error'>{errorMsg}</label>
+                    }
                 </form>
             </div>
         );

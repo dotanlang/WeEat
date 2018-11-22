@@ -49,7 +49,8 @@ class Filters extends Component {
     }
 
     hidePortal() {
-        this.setState({ show: false });
+        this.setState({ show: false, errorMsg: "" });
+
     }
 
     createRestaurant = (values) => {
@@ -60,15 +61,17 @@ class Filters extends Component {
             ...values
         })
             .then((response) => {
-                console.log("rest failed")
-                console.log(response.data)
+                console.log("CCCCC");
+                console.log(response);
+                this.hidePortal();
+                this.props.reloadRestaurants();
                 return response.data;
             })
-            .then((data) => {
-                console.log("rest added")
-                console.log(data)
+            .catch((error) => {
+                console.log("TTTTT");
+                console.log(error);
+                this.setState({ errorMsg: "Can't create new restaurant"});
             });
-        this.hidePortal();
     };
 
 
@@ -86,7 +89,10 @@ class Filters extends Component {
                 <Portal>
                     { this.state.show &&
                         <div className='portal'>
-                            <AddRestaurantForm cuisines={this.props.cuisines} createRestaurant={this.createRestaurant} cancel={this.hidePortal} />
+                            <AddRestaurantForm cuisines={this.props.cuisines}
+                                               createRestaurant={this.createRestaurant}
+                                               cancel={this.hidePortal}
+                                               errorMsg={this.state.errorMsg} />
                         </div>
                      }
                 </Portal>
