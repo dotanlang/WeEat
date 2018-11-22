@@ -2,15 +2,15 @@
 <html>
   <head>
     <title>WeEat</title>
+    <%= stylesheet_link_tag 'react-table', media: 'all' %>
+    <link href="<%= asset_pack_path 'we_eat_app.css' %>" media="screen" rel="stylesheet" />
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <div id="root"/>
   </head>
 
   <body>
     <%= yield %>
-    <%= javascript_pack_tag 'hello_react' %>
   </body>
 </html>

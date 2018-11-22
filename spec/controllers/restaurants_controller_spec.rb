@@ -14,49 +14,45 @@ describe RestaurantsController, type: :controller do
     it "creates a new restaurant" do
       post :create, params: { name: 'Artzieli11',
                                     cuisine: 'pizza',
-                                    rating: 3,
                                     ten_bis: true,
                                     address: 'street in tel aviv',
                                     max_delivery_time: 45 }
       expect(response.status).to eq(200)
-    end
-
-    it "can't create a restaurant with an invalid rating" do
-      post :create, params: { name: 'Artzieli',
-                              cuisine: 'pizza',
-                              rating: 7,
-                              ten_bis: true,
-                              address: 'street in tel aviv',
-                              max_delivery_time: 45 }
-      expect(response.status).to eq(400)
+      rest_id = JSON.parse(response.body)['id']
+      expect(Restaurant.count()).to eq(1)
+      expect(Restaurant.find_by_name('Artzieli11')['id']).to eq(rest_id)
     end
 
     it "creates a restaurant without optional fields" do
       post :create, params: { name: 'Artzieli', address: 'street in tel aviv' }
       expect(response.status).to eq(200)
+      rest_id = JSON.parse(response.body)['id']
+      expect(Restaurant.count()).to eq(1)
+      expect(Restaurant.find_by_name('Artzieli')['id']).to eq(rest_id)
     end
 
     it "can't create a restaurant without a name" do
       post :create, params: { address: 'street in tel aviv' }
       expect(response.status).to eq(400)
+      expect(Restaurant.count()).to eq(0)
     end
 
     it "can't create a restaurant with a name that already exists" do
       post :create, params: { name: 'Artzieli1',
                               cuisine: 'pizza',
-                              rating: 3,
                               ten_bis: true,
                               address: 'street in tel aviv',
                               max_delivery_time: 45 }
       expect(response.status).to eq(200)
+      expect(Restaurant.count()).to eq(1)
 
       post :create, params: { name: 'Artzieli1',
                               cuisine: 'pizza',
-                              rating: 3,
                               ten_bis: true,
                               address: 'street in tel aviv',
                               max_delivery_time: 45 }
       expect(response.status).to eq(409)
+      expect(Restaurant.count()).to eq(1)
     end
 
   end
@@ -72,7 +68,7 @@ describe RestaurantsController, type: :controller do
 
     it "fails to update a non existent id" do
       expect {
-        patch :update, params: { id: 22, name: 'Chez Pierre' }
+        patch :update, params: { id: rest.id + 1, name: 'Chez Pierre' }
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

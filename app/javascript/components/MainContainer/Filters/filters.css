@@ -1,0 +1,40 @@
+.filters-container {
+    display: flex;
+    align-items: center;
+    background-color: #B00100;
+    height: 100px;
+}
+
+.filter-name {
+    font-size: 16px;
+    margin: 10px;
+}
+
+.Dropdown-control {
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #333;
+    cursor: default;
+    outline: none;
+    padding: 8px 52px 8px 10px;
+    transition: all 200ms ease;
+    width: 400px;
+    margin-right: 100px;
+}
+
+.search-box {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #333;
+    outline: none;
+    padding: 8px 52px 8px 10px;
+    transition: all 200ms ease;
+    width: 400px;
+    margin-right: 100px;
+}

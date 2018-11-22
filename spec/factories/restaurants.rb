@@ -2,10 +2,9 @@ require 'factory_bot'
 
 FactoryBot.define do
   factory :restaurant do
-    name { Faker::NewGirl.character }
+    name { Faker::Name.unique.name }
     cuisine { Faker::Witcher.monster }
     address { Faker::Address.full_address }
-    rating { Faker::Number.between(0, 3) }
     max_delivery_time { Faker::Number.between(30, 120) }
     ten_bis { Faker::Boolean.boolean }
 
