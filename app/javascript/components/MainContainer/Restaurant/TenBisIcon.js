@@ -3,10 +3,6 @@ import TenBisImage from '/assets/images/tenbis.jpg';
 import './tenbisicon.css'
 
 class TenBisIcon extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const should_displey = this.props.display;
         let img_tag = <div className='ten-bis-no-icon'/>;

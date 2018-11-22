@@ -18,23 +18,23 @@ class Filters extends Component {
         }
     }
 
-    onChangeRating = (event) => {
-        this.setState({rating_filter_selected: event.value})
-        this.props.onChangeFilter('rating_filter', event.value);
+    onChangeRating = (item) => {
+        this.setState({rating_filter_selected: item.value})
+        this.props.onChangeFilter('rating_filter', item.value);
     }
 
-    onChangeCuisine = (event) => {
-        this.setState({cuisine_filter_selected: event.value})
-        this.props.onChangeFilter('cuisine_filter', event.value);
+    onChangeCuisine = (item) => {
+        this.setState({cuisine_filter_selected: item.value})
+        this.props.onChangeFilter('cuisine_filter', item.value);
     }
 
-    onChangeTenBis = (event) => {
-        this.setState({ten_bis_filter_selected: event.value})
-        this.props.onChangeFilter('ten_bis_filter', event.value);
+    onChangeTenBis = (item) => {
+        this.setState({ten_bis_filter_selected: item.value})
+        this.props.onChangeFilter('ten_bis_filter', item.value);
     }
 
-    onChangeSearch = (event) => {
-        this.props.onChangeSearch(event.target.value);
+    onChangeSearch = (item) => {
+        this.props.onChangeSearch(item.target.value);
     }
 
     showPortal = () => {

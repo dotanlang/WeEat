@@ -13,11 +13,6 @@ import '@material/react-card/dist/card.css'
 
 
 class RestaurantCard extends Component {
-    constructor(props) {
-        super(props);
-        console.log('props=' + props)
-    }
-
     render() {
         return (
             <div className='card'>
