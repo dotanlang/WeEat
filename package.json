@@ -2,23 +2,32 @@
   "name": "we_eat",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@material/icon-button": "^0.41.0",
     "@material/react-card": "^0.6.2",
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
-    "babel-preset-react": "^6.24.1",
+    "google-map-react": "^1.1.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-dropdown": "^1.6.2",
-    "react-google-maps": "^9.4.5",
+    "react-redux": "^5.1.1",
     "react-star-ratings": "^2.3.0",
-    "react-table": "^6.8.6",
-    "react_ujs": "^2.4.4"
+    "react_ujs": "^2.4.4",
+    "redux": "^4.0.1",
+    "redux-form": "^7.4.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
     "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-env": "^1.7.0",
     "webpack-dev-server": "2.11.2"
   }
 }

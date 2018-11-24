@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from "./Header/Header"
 import MainContainer from "./MainContainer/MainContainer";
+import Portal from "./Portal";
 
 class App extends Component {
 
@@ -9,6 +10,11 @@ class App extends Component {
       <div>
           <Header/>
           <MainContainer/>
+          <Portal>
+              <div>
+                  Fucking portal
+              </div>
+          </Portal>
       </div>
     );
   }

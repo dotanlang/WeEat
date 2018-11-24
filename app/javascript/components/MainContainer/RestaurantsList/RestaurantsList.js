@@ -10,7 +10,7 @@ class RestaurantsList extends Component {
     render() {
         return (
             <div>
-                {this.props.restaurants && this.props.restaurants.map((rest, i) => <RestaurantCard key={i} {...rest}/>)}
+                {this.props.restaurants && this.props.restaurants.map((rest) => <RestaurantCard key={rest.name} {...rest}/>)}
             </div>
         );
     }

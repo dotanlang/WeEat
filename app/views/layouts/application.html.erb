@@ -2,15 +2,17 @@
 <html>
   <head>
     <title>WeEat</title>
-    <%= stylesheet_link_tag 'react-table', media: 'all' %>
     <link href="<%= asset_pack_path 'we_eat_app.css' %>" media="screen" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <div id="root"/>
+
   </head>
 
   <body>
+    <div id="root"> </div>
+    <div id="portal"> </div>
     <%= yield %>
   </body>
 </html>

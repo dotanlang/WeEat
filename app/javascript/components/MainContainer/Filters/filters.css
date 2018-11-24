@@ -6,9 +6,12 @@
 }
 
 .filter-name {
-    font-size: 16px;
+    font-weight: 300;
+    font-size: 20px;
+    color: black;
     margin: 10px;
 }
+
 
 .Dropdown-control {
     position: relative;
@@ -24,6 +27,8 @@
     transition: all 200ms ease;
     width: 400px;
     margin-right: 100px;
+
+
 }
 
 .search-box {
@@ -37,4 +42,31 @@
     transition: all 200ms ease;
     width: 400px;
     margin-right: 100px;
+}
+
+.portal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.add-rest-button {
+    font-weight: 300;
+    font-size: 20px;
+    color: black;
+    border-radius: 5px;
+    background-color: #feffff;
+}
+
+.add-rest-button:hover,
+.add-rest-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

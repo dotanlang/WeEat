@@ -1,26 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Card, {
     CardPrimaryContent,
     CardActions,
     CardActionButtons
-} from "@material/react-card";
+} from "@material/react-card"
 
-import StartsRating from "./StartsRating";
+import StartsRating from "./StartsRating"
 import TenBisIcon from "./TenBisIcon"
 import './restaurant_card.css'
 
-// import '@material/react-card/dist/card.css';
-const x = require('@material/react-card/dist/card.css')
-
-console.log('x=' + x);
+import '@material/react-card/dist/card.css'
 
 
 class RestaurantCard extends Component {
-    constructor(props) {
-        super(props);
-        console.log('props=' + props)
-    }
-
     render() {
         return (
             <div className='card'>
