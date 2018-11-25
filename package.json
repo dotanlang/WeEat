@@ -33,5 +33,9 @@
   "engines": {
     "yarn": ">= 1.0.2",
     "node": ">=6.11.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   }
 }
